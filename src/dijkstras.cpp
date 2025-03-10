@@ -57,17 +57,14 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
 {
     vector<int> path;
     stack<int> rPath;
-    rPath.push(destination);
+    path.push_back(destination);
     for (int currPrev=previous[destination]; currPrev != -1; currPrev=previous[currPrev])
-        rPath.push(currPrev);
-    while (!rPath.empty()){
-        int c = rPath.top(); rPath.pop();
-        path.push_back(c);
-    }
+        path.push_back(currPrev);
     return path;
 }
 void print_path(const vector<int>& v, int total)
 {
-    for (int i=0; i < total; ++i)
+    for (int i=total; i >= 0; --i)
         std::cout << v[i] << " ";
+    std::cout << std::endl;
 }
