@@ -71,22 +71,34 @@ TEST_F(LadderTest, adjacent)
   test_adjacency("YES", "YE");
   test_adjacency("YES", "YA", false);
   test_adjacency("APP", "W", false);
+  test_adjacency("WAPP", "WPPPP", false);
   test_adjacency("Petaler", "Petale", true);
   test_adjacency("ese", "Yese", true);
+  test_adjacency("chat", "cheat", true);
+  test_adjacency("for", "four", true);
+  test_adjacency("whaet", "whaetee", false);
+  test_adjacency("see", "base", false);
 }
+
 
 TEST_F(LadderTest, WordLadder)
 {
   set<string> wordList;
-  load_words(wordList, "src/largeword.txt");
-  //load_words(wordList, "src/words.txt");
+  //load_words(wordList, "src/largeword.txt");
+  load_words(wordList, "src/words.txt");
   //for (auto i: wordList) std::cout << i << std::endl;
-  vector<string> ladder = generate_word_ladder("pee", "polar", wordList);
+    //vector<string> ladder = generate_word_ladder("pee", "polar", wordList);
     //vector<string> ladder = generate_word_ladder("ice", "spice", wordList);
-  //vector<string> ladder = generate_word_ladder("wallop", "weiner", wordList);
+    vector<string> ladder = generate_word_ladder("vile", "village", wordList);
   std::cout << "Ladder Is: ";
   for (auto i: ladder) std::cout << i << "->";
   std::cout << std::endl;
+
+
+}
+
+TEST_F(LadderTest, Predefined){
+  //verify_word_ladder();
 
 
 }

@@ -20,9 +20,10 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     int diff_count = 0, start_pos = 0, offset1 = 0, offset2 = 0;
     if (d != 0){
         // Add 1 to diff_count since size differs by 1
-        ++diff_count;
+        if (str1[size1-1] != str2[size2-1]) ++diff_count;
         // If difference is the first index, offset one so they add up
         if (str1[start_pos] != str2[start_pos]){
+            ++diff_count;
             if (size2 < size1) ++offset1;
             else ++offset2;
         }
@@ -31,7 +32,11 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     // Check if each element is the same, start && end differences are accounted for
     for (int i=start_pos; i < smallest && diff_count < 2; ++i){
             //std::cout << "\tCOMPARING: " << str1[i + offset1] << " && " << str2[i + offset2] << std::endl;
-        if (str1[i + offset1] != str2[i + offset2]) ++diff_count;
+        if (str1[i + offset1] != str2[i + offset2]){
+            if (size1 < size2) --offset1;
+            else if (size2 < size1) --offset2;
+            ++diff_count;
+        }
     }
     return (diff_count > 1) ? false: true;
 }
@@ -111,7 +116,7 @@ void verify_word_ladder()
 {
     set<string> word_list;
 
-    load_words(word_list, "words.txt");
+    load_words(word_list, "src/words.txt");
 
     my_assert(generate_word_ladder("cat", "dog", word_list).size() == 4);
 
