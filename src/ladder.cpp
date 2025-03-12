@@ -93,7 +93,6 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
             }
         }
     }
-    std::cout << "No word ladder found." << std::endl;
     return ladder();
 }
 void load_words(set<string> & word_list, const string& file_name)
@@ -110,6 +109,8 @@ void load_words(set<string> & word_list, const string& file_name)
 }
 void print_word_ladder(const vector<string>& ladder)
 {
+    if (ladder.size() == 0) {std::cout << "No word ladder found." << std::endl; return;}
+    std::cout << "Word ladder found: ";
     for (string word: ladder) std::cout << word << " ";
     std::cout << std::endl;
 }

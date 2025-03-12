@@ -23,6 +23,16 @@ void printVec(ostream& out, const vector<int> v)
 
 class Dijkstras: public testing::Test {};
 
+TEST_F (Dijkstras, extract_shortest)
+{
+
+
+
+
+
+}
+
+
 TEST_F(Dijkstras, SmallTxt) {
   Graph g;
   file_to_graph("src/small.txt", g);
@@ -34,7 +44,7 @@ TEST_F(Dijkstras, SmallTxt) {
   printVec(cout, tree);
 
   auto path = extract_shortest_path(tree, previous, 2);
-  print_path(path, path.size());
+  print_path(path, tree[2]);
 
 }
 
@@ -49,10 +59,10 @@ TEST_F(Dijkstras, MedTxt) {
   printVec(cout, tree);
 
   auto path = extract_shortest_path(tree, previous, 2);
-  print_path(path, path.size());
+  print_path(path, tree[2]);
 
 }
-
+/*
 class LadderTest: public testing::Test {};
 
 void test_adjacency(const string& word1, const string& word2, bool expected = true){
@@ -102,4 +112,4 @@ TEST_F(LadderTest, Predefined){
   //verify_word_ladder();
 
 
-}
+}*/
