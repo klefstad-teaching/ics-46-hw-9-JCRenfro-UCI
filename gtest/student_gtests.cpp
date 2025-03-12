@@ -23,16 +23,6 @@ void printVec(ostream& out, const vector<int> v)
 
 class Dijkstras: public testing::Test {};
 
-TEST_F (Dijkstras, extract_shortest)
-{
-
-
-
-
-
-}
-
-
 TEST_F(Dijkstras, SmallTxt) {
   Graph g;
   file_to_graph("src/small.txt", g);
@@ -43,8 +33,10 @@ TEST_F(Dijkstras, SmallTxt) {
   vector<int> tree = dijkstra_shortest_path(g, 0, previous);
   printVec(cout, tree);
 
-  auto path = extract_shortest_path(tree, previous, 2);
-  print_path(path, tree[2]);
+  for (size_t i=0; i < tree.size(); ++i){
+    auto path = extract_shortest_path(tree, previous, i);
+    print_path(path, tree[i]);
+  }
 
 }
 
@@ -57,11 +49,34 @@ TEST_F(Dijkstras, MedTxt) {
 
   vector<int> tree = dijkstra_shortest_path(g, 0, previous);
   printVec(cout, tree);
+  printVec(cout, previous);
 
-  auto path = extract_shortest_path(tree, previous, 2);
-  print_path(path, tree[2]);
+  for (size_t i=0; i < tree.size(); ++i){
+    auto path = extract_shortest_path(tree, previous, i);
+    print_path(path, tree[i]);
+  }
 
 }
+
+TEST_F(Dijkstras, large) {
+  Graph g;
+  file_to_graph("src/large.txt", g);
+  printGraph(std::cout, g);
+
+  vector<int> previous(g.size());
+
+  vector<int> tree = dijkstra_shortest_path(g, 0, previous);
+  printVec(cout, tree);
+  printVec(cout, previous);
+
+  for (size_t i=0; i < tree.size(); ++i){
+    auto path = extract_shortest_path(tree, previous, i);
+    print_path(path, tree[i]);
+  }
+
+}
+
+
 /*
 class LadderTest: public testing::Test {};
 

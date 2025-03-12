@@ -20,7 +20,8 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     int size = G.size();
     vector<int> distances(size, INF);
     vector<bool> visited(size, false);
-    priority_queue<pair<int, int>> minHeap; // Minheap pair (vertex, weight)
+    //priority_queue<pair<int, int>> minHeap; // Minheap pair (vertex, weight)
+    MinHeap minHeap;
     // Set distance of start position to 0
     distances[source] = 0;
     previous[source] = -1;
@@ -29,24 +30,29 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     // Start Iteration
     while (!minHeap.empty()){
         // Get current minimum node
-        int currMinNode = minHeap.top().first; minHeap.pop();
-            //std::cout << "IN: " << currMinNode << std::endl;
+        int currMinNode = minHeap.top().first;
+            //std::cout << "IN: " << currMinNode << " WITH WEIGHT: " << minHeap.top().second << std::endl;
+        minHeap.pop();
         // Check if visited, if visited go to next part
         if (visited[currMinNode]) continue;
         // If not visited set to visited
         visited[currMinNode] = true;
         // Process Edges of current node
         for (Edge edge: G[currMinNode]){
+                //std::cout << "\tIN EDGE: " << edge; std::cout << " Distances are: "; for (auto i: distances) std::cout << i << " "; std::cout << std::endl;
             int disToDestNode = distances[currMinNode] + edge.weight;
             int currDisToDestNode = distances[edge.dst];
+                //std::cout << "\tdisToDestNode: " << disToDestNode << " current Distance to that node: " << currDisToDestNode << std::endl;
+                //std::cout << "\tVisited: "; for (auto i: visited) std::cout << i << " "; std::cout << std::endl;
             if (!visited[edge.dst] && disToDestNode < currDisToDestNode){
                 // Update distance to new minimum
                 distances[edge.dst] = disToDestNode;
                 // Set previous node
                 previous[edge.dst] = currMinNode;
                 // Add to heap
-                    //std::cout << "\tPUSHING NODE: " << edge.dst << std::endl;
-                minHeap.push({edge.dst, disToDestNode});
+                    //std::cout << "\t\tPUSHING NODE: " << edge.dst << std::endl;
+                    //minHeap.push({edge.dst, disToDestNode});
+                minHeap.push({edge.dst, edge.weight});
             }
         }
             //std::cout << "MINHEAP TOP IS: " << minHeap.top().first << std::endl;
