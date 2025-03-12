@@ -55,17 +55,23 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 }
 vector<int> extract_shortest_path(const vector<int>& distances, const vector<int>& previous, int destination)
 {
-    /*Path is reversed since backtracking*/
+    /*Path is reversed since backtracking so use stack to pop into vector to fix*/
     vector<int> path;
-    path.push_back(destination);
+    stack<int> rpath;
+    rpath.push(destination);
     for (int currPrev=previous[destination]; currPrev != -1; currPrev=previous[currPrev])
-        path.push_back(currPrev);
+        rpath.push(currPrev);
+    while (!rpath.empty()){
+        int val = rpath.top(); rpath.pop();
+        path.push_back(val);
+    }
     return path;
 }
 void print_path(const vector<int>& v, int total)
 {
-    for (int i=v.size()-1; i >= 0; --i)
+    size_t size = v.size();
+    for (size_t i=0; i < size; ++i)
         std::cout << v[i] << " ";
     std::cout << std::endl;
-    std::cout << "Total cost is: " << total << std::endl;
+    std::cout << "Total cost is " << total << std::endl;
 }
