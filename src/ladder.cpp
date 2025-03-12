@@ -12,9 +12,10 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
         Let d be distance between str1 & str2 (str1 - str2) usage
     */
     // If Difference greater than 2 return
+    int size1 = str1.size(); int size2 = str2.size();
+    d = size1 - size2;
     if (abs(d) > 1) return false;
     // Get the length of the smallest to loop through
-    int size1 = str1.size(); int size2 = str2.size();
     int smallest = (d > 0) ? size2: size1;
     // Count how many differences each string has
     int diff_count = 0, start_pos = 0, offset1 = 0, offset2 = 0;
@@ -92,6 +93,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
             }
         }
     }
+    std::cout << "No word ladder found." << std::endl;
     return ladder();
 }
 void load_words(set<string> & word_list, const string& file_name)
@@ -109,6 +111,7 @@ void load_words(set<string> & word_list, const string& file_name)
 void print_word_ladder(const vector<string>& ladder)
 {
     for (string word: ladder) std::cout << word << " ";
+    std::cout << std::endl;
 }
 
 #define my_assert(e) {cout << #e << ((e) ? " passed": " failed") << endl;}

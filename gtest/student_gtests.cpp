@@ -34,7 +34,7 @@ TEST_F(Dijkstras, SmallTxt) {
   printVec(cout, tree);
 
   auto path = extract_shortest_path(tree, previous, 2);
-  print_path(path, path.size()-1);
+  print_path(path, path.size());
 
 }
 
@@ -49,7 +49,7 @@ TEST_F(Dijkstras, MedTxt) {
   printVec(cout, tree);
 
   auto path = extract_shortest_path(tree, previous, 2);
-  print_path(path, path.size()-1);
+  print_path(path, path.size());
 
 }
 
@@ -78,6 +78,7 @@ TEST_F(LadderTest, adjacent)
   test_adjacency("for", "four", true);
   test_adjacency("whaet", "whaetee", false);
   test_adjacency("see", "base", false);
+  test_adjacency("app", "apple", false);
 }
 
 
@@ -89,7 +90,7 @@ TEST_F(LadderTest, WordLadder)
   //for (auto i: wordList) std::cout << i << std::endl;
     //vector<string> ladder = generate_word_ladder("pee", "polar", wordList);
     //vector<string> ladder = generate_word_ladder("ice", "spice", wordList);
-    vector<string> ladder = generate_word_ladder("vile", "village", wordList);
+    vector<string> ladder = generate_word_ladder("villag", "village", wordList);
   std::cout << "Ladder Is: ";
   for (auto i: ladder) std::cout << i << "->";
   std::cout << std::endl;
